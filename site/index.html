@@ -3,18 +3,36 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ReedItgam APP</title>
+	<link rel="stylesheet" 
+	     href="./vendor/bootstrap/css/bootstrap.css">
+	 <style>
+		.glyphicon-thumbs-up {cursor: pointer;}
+	 </style>
 </head>
 <body ng-app="reeditgam" 
 	ng-controller="mainCtrl">
 	
 	<!-- Creando el formulario -->
 	<form ng-submit="addPost()">
+		<!-- Input del Titulo -->
 		<input type="text" ng-model="title">
+		<br>
+		<!-- Input del Link -->
+		<input type="text" ng-model="link">
+		<br>
 		<button type="submit">Post</button>
 		
 	</form>
 	<div ng-repeat="post in posts | orderBy: '-upvotes'">
-		{{post.title}} -Likes: {{post.upvotes}}
+		<span ng-click="incrementUpvotes(post)">^</span>
+		<!-- Sgregamos los Links -->
+		<a ng-show="post.link" href="{{post.link}}">
+			{{post.title}}
+		</a>
+		<span ng-hide="post.link">
+			{{post.title}}
+		</span>
+		 -Likes: {{post.upvotes}}
 	</div>
 	<!-- CArgando librerias -->
 	<!-- es una buena practica al final cargar los scripts -->
