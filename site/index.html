@@ -13,7 +13,15 @@
 	ng-controller="mainCtrl">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
-			<div class="page-header">
+		<ui-view></ui-view>	
+	    </div>
+    </div>
+    <!-- Creando plantillas -->
+    <!-- Plantilla /home.html -->
+    <script 
+    type="text/ng-template"
+    id="/home.html">
+    <div class="page-header">
 				<h1>Reeditgam!!!</h1>
 	<!-- Creando el formulario -->
 	<form ng-submit="addPost()"
@@ -60,8 +68,8 @@
 		
 	</div>
 			</div>
-	    </div>
-    </div>
+
+    </script>
 	
 	<!-- CArgando librerias -->
 	<!-- es una buena practica al final cargar los scripts -->
@@ -76,8 +84,12 @@
 	<!-- cargando angular-->
 	<script 
 	type="text/javascript"
-	src="vendor/angular/angular.js"
-	>
+	src="./vendor/angular/angular.js">
+	</script>
+	<!-- cargando angular ui router -->
+	<script 
+	type="text/javascript"
+	src="./vendor/angular-ui-router/angular-ui-router.js">
 	</script>
 	<script 
 	type="text/javascript"
