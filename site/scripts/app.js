@@ -3,7 +3,7 @@ console.log ("#Luis: Cargo app.js");
 //como parametro del arreglo de objetos
 //del modulo
 var modulo1=
-	angular.module("reeditgam",['ui.router']);
+	angular.module("reeditgam",['ui.router','hSweetAlert']);
 	//configurando las rutas
 	//recibe un arreglo de elementos
 	modulo1.config(
@@ -11,12 +11,21 @@ var modulo1=
 		'$urlRouterProvider',
 		function($stateProvider, $urlRouterProvider){
 			//Iniciando rutina de configuración
+			// Creando ruta Home
 			$stateProvider.state('home',{
 				//Definiendo estado como un objeto
 				url:"/home", //Url que define el estado
 				templateUrl: "/home.html", //Plantilla base para el estado
-				controller: 'mainCtrl'
+				controller: "mainCtrl"
 			});
+			//Creando ruta de visualizacion 
+			//de Post
+			$stateProvider.state('posts',{
+				url: "/posts/{id}",
+				templateUrl: "/posts.html",
+				controller: "postsCtrl"
+			});
+
 			//Url por defecto
 			$urlRouterProvider.otherwise('home');
 		}]);
@@ -50,9 +59,10 @@ modulo1.factory('posts',[function(){
 
 //creando controlador
 //dependcy injection
+//creando controlador mainCtrl
 modulo1.controller("mainCtrl",[
-	'$scope','posts',//Inyectando factory post
-	function($scope, posts){
+	'$scope','posts', 'sweet',//Inyectando factory post
+	function($scope, posts, sweet){
 		$scope.test = "Hola Angular";
 		// Modelo al cual se le asigna 
 		// el resultado del factory
@@ -62,7 +72,7 @@ modulo1.controller("mainCtrl",[
 		 $scope.addPost = function(){
 		 	if(!$scope.title || $scope.title === "")
 		 	{
-		 		alert("No se permite postear titulos vacios")
+		 		sweet.show("No se permite postear titulos vacios")
 		 		return;
 		 	}
 		 	$scope.posts.push(
@@ -80,3 +90,12 @@ modulo1.controller("mainCtrl",[
 		 		post.upvotes += 1;
 		 	};
 	}]);
+
+// Creando controlador postsCtrl
+modulo1.controller("postsCtrl",[
+	'$scope',
+	'$stateParams',
+	'posts'],function($scope, $stateParams, posts){
+		//Cuerpo del controlador
+		
+	});
